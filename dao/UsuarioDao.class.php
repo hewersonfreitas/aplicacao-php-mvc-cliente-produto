@@ -3,15 +3,19 @@
 include 'Conexao.php';
 include '../models/Usuario.class.php';
 
-class UsuarioDao extends Conexao {
+class UsuarioDao {
+
+    private $conn;
+
+    public function __construct() {
+        $this->conn = new Conexao();
+    }
 
     public function insert(Usuario $user) {
 
-        $this->conn->conectar();
-
         $sql = "INSERT INTO usuario (nome,email,senha,data_nascimento)"
                 . "values(:nome,:email,:senha,:data_nascimento)";
-        $statement = $this->conn->prepare($sql);
+        $statement = $this->conn->Conectar()->prepare($sql);
         $statement->bindValue(":nome", $user->getNomeUsuario());
         $statement->bindValue(":email", $user->getEmailUsuario());
         $statement->bindValue(":senha", $user->getSenhaUsuario());
