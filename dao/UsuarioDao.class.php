@@ -13,13 +13,14 @@ class UsuarioDao {
 
     public function insert(Usuario $user) {
 
-        $sql = "INSERT INTO usuario (nome,email,senha,data_nascimento)"
+        $sql = "INSERT INTO usuario (nome_usuario,email_usuario,senha_usuario,data_nasc_usuario)"
                 . "values(:nome,:email,:senha,:data_nascimento)";
         $statement = $this->conn->Conectar()->prepare($sql);
         $statement->bindValue(":nome", $user->getNomeUsuario());
         $statement->bindValue(":email", $user->getEmailUsuario());
         $statement->bindValue(":senha", $user->getSenhaUsuario());
         $statement->bindValue(":data_nascimento", $user->getDataNascimentoUsuario());
+        $statement->execute();
     }
 
 }
