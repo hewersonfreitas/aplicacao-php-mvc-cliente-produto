@@ -22,5 +22,13 @@ class UsuarioDao {
         $statement->bindValue(":data_nascimento", $user->getDataNascimentoUsuario());
         $statement->execute();
     }
+    
+    public function getAll($param) {
+        
+    }
+    
+    public function getId($param) {
+        
+    }
 
 }
