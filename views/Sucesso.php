@@ -6,12 +6,12 @@
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" />
-        <link rel="stylesheet" type="text/css" href="css/aquaadmin.css" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap-responsive.css" />
+        <link rel="stylesheet" type="text/css" href="../css/aquaadmin.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     <body>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -42,14 +42,30 @@
                 <div class="span2 sp2 all-left">
                     <div class="sidebar-nav">
                         <ul class="nav nav-list">
-                            <li class="active"><a href="index.php"><i class="icon-home icon-aqua"></i> Home</a></li>
-                            <li><a href="views/CadastroUsuario.php"><i class="icon-tasks icon-aqua"></i> Cadastro Cliente</a></li>
+                            <li class="active"><a href="../index.php"><i class="icon-home icon-aqua"></i> Home</a></li>
+                            <li><a href="CadastroUsuario.php"><i class="icon-tasks icon-aqua"></i> Cadastro Cliente</a></li>
                         </ul>
                     </div>
                 </div><!--/span-->
                 <div class="span10 content">
                     <div id="content">
-
+                        <div class="span11 panel">
+                            <div class="panel-header">
+                                <i class="icon-exclamation-sign icon-blue"></i>
+                                <h2>Operação</h2>
+                            </div>
+                            <div class="panel-content">
+                                <p>
+                                </p>
+                                <div class="alert alert-success">
+                                    <a class="close" data-dismiss="alert" href="#">×</a>
+                                    <div class="alert-icon">
+                                        <i class="icon-ok-sign icon-green"></i>
+                                    </div>
+                                    A operação foi efetuada com sucesso!
+                                </div>
+                            </div>
+                        </div>
 
                     </div><!-- content -->
                 </div>
@@ -59,6 +75,6 @@
                 <p>&copy; <a href="">App MVC Cadastro Usuarios e Produtos</a></p>
             </footer>
         </div><!--/.fluid-container-->
-        <script type='text/javascript' src='js/bootstrap.min.js'></script>
+        <script type='text/javascript' src='../sjs/bootstrap.min.js'></script>
     </body>
 </html>
