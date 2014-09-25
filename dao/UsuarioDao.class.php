@@ -18,42 +18,50 @@ class UsuarioDao {
         $statement = $this->conn->Conectar()->prepare($sql);
         $statement->bindValue(":nome", $user->getNomeUsuario());
         $statement->bindValue(":email", $user->getEmailUsuario());
-        $statement->bindValue(":senha", $user->getSenhaUsuario());
+        $statement->bindValue(":senha", md5($user->getSenhaUsuario()));
         $statement->bindValue(":data_nascimento", $user->getDataNascimentoUsuario());
         $statement->execute();
     }
-    
+
     public function getAll() {
-        $sql = "SELECT * FROM usuario";
-        return $resultSet = $this->conn->Conectar()->query($sql)->fetch(PDO::FETCH_OBJ);
-       // return $resultSet->execute();
-        
+        $sql = "SELECT  * FROM usuario";
+        $resultSet = $this->conn->Conectar()->query($sql);
+        return $resultSet->fetchAll(PDO::FETCH_OBJ);
     }
-    
+
     public function getId($id) {
-        $sql = "SELECT * FROM usuario WHERE id_pessoa = ".$id;
+        $sql = "SELECT * FROM usuario WHERE id_usuario = " . $id;
         $resultSet = $this->conn->Conectar()->query($sql);
         $resultSet->execute();
         return $resultSet->fetch(PDO::FETCH_OBJ);
     }
     
-    public function update(Usuario $user) {
+    public function getEmail($email) {
+        $sql = "SELECT email_usuario FROM usuario WHERE email_usuario = '" . $email."'";
+        $resultSet = $this->conn->Conectar()->query($sql);
+        $resultSet->execute();
+        return $resultSet->fetch(PDO::FETCH_OBJ);
+    }
 
-        $sql = "UPDATE usuario SET nome_usuario=:nome,email_usuario=:email,senha_usuario = :senha,data_nasc_usuario=:data_nascimento)";
+    public function update(Usuario $user, $id) {
+
+        $sql = "UPDATE usuario SET nome_usuario=:nome,email_usuario=:email,senha_usuario = :senha,data_nasc_usuario=:data_nascimento WHERE id_usuario = :id";
         $statement = $this->conn->Conectar()->prepare($sql);
         $statement->bindValue(":nome", $user->getNomeUsuario());
         $statement->bindValue(":email", $user->getEmailUsuario());
-        $statement->bindValue(":senha", $user->getSenhaUsuario());
+        if (md5($user->getSenhaUsuario()) != $this->getId((int) $id)->senha_usuario) {
+            $statement->bindValue(":senha", $user->getSenhaUsuario());
+        }
         $statement->bindValue(":data_nascimento", $user->getDataNascimentoUsuario());
+        $statement->bindValue(":id", (int) $id);
         $statement->execute();
     }
-    
+
     public function delete($id) {
-        $sql = "SELECT * FROM usuario WHERE id_pessoa = :id";
-        $resultSet = $this->conn->Conectar()->query($sql);
-        $resultSet->bindValue("id", $id);
+        $sql = "DELETE FROM usuario WHERE id_usuario = :id";
+        $resultSet = $this->conn->Conectar()->prepare($sql);
+        $resultSet->bindValue(":id", (int) $id);
         $resultSet->execute();
-        return $resultSet->fetch(PDO::FETCH_OBJ);;
     }
 
 }

@@ -43,7 +43,7 @@
                     <div class="sidebar-nav">
                         <ul class="nav nav-list">
                             <li class="active"><a href="index.php"><i class="icon-home icon-aqua"></i> Home</a></li>
-                            <li><a href="views/CadastroUsuario.php"><i class="icon-tasks icon-aqua"></i> Cadastro Cliente</a></li>
+                            <li><a href="views/CadastroUsuario.php" ><i class="icon-tasks icon-aqua"></i> Cadastro Cliente  </a></li>
                         </ul>
                     </div>
                 </div><!--/span-->

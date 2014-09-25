@@ -57,12 +57,16 @@
                             <div class="panel-content">
                                 <p>
                                 </p>
-                                <div class="alert alert-success">
+                                <div class="alert alert-danger">
                                     <a class="close" data-dismiss="alert" href="#">×</a>
                                     <div class="alert-icon">
-                                        <i class="icon-ok-sign icon-green"></i>
+                                        <i class="icon-exclamation-sign icon-red"></i>
                                     </div>
-                                    A operação foi efetuada com sucesso!
+                                    <div class="alert-content">
+                                        <h4>Erro ao cadastrar !</h4>
+                                        <?php echo $_REQUEST['info']?> já existente, tente novamente com email válido !<br><br>
+                                        <a class="btn" href="../index.php"> Voltar ao Inicio </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
