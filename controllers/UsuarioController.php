@@ -2,7 +2,7 @@
 
 include '../dao/UsuarioDao.class.php';
 
-$dados = $_REQUEST['dados'];
+$dados = $_POST['dados'];
 
 switch ($_REQUEST['action']) {
     case 1:
@@ -59,7 +59,6 @@ switch ($_REQUEST['action']) {
         //Inserção de Usuario no Banco
 
         $flag = 1; //Varivel booleana, verificação dados
-        //
         //Verificando se existe dados vazios
         foreach ($dados as $valor) {
             if ($valor == "") {
@@ -77,7 +76,7 @@ switch ($_REQUEST['action']) {
 
                 //Persistindo Usuario no Banco
                 $daoUsuario = new UsuarioDao();
-                
+
                 //Verifica duplicidade de email
                 if ($daoUsuario->getEmail($dados[1])->email_usuario == $dados[1]) {
                     header("location: ../views/Aviso.php?info=Email");
@@ -85,9 +84,6 @@ switch ($_REQUEST['action']) {
                     $daoUsuario->update($usuario, $dados[4]);
                     header("location: ../views/CadastroUsuario.php");
                 }
-                
-
-                header("location: ../views/CadastroUsuario.php");
             }
         }
         break;

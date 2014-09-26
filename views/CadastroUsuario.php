@@ -45,7 +45,7 @@
                     <div class="sidebar-nav">
                         <ul class="nav nav-list">
                             <li class="active"><a href="../index.php" ><i class="icon-home icon-aqua"></i> Home </a></li>
-                            <li><a href="CadastroUsuario.php"><i class="icon-tasks icon-aqua"></i> Cadastro Cliente</a></li>
+                            <li><a href="CadastroUsuario.php"><i class="icon-tasks icon-aqua"></i> Usuario</a></li>
                         </ul>
                     </div>
                 </div><!--/span-->
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <input type="hidden" class="input-medium" value="<?php echo ($data->id_usuario=="")?"-":$data->id_usuario==""; ?>"name="dados[]">
+                                                <input type="hidden" class="input-medium" value="<?php echo ($data->id_usuario=="")?"-":$data->id_usuario; ?>"name="dados[]">
                                             </div>
                                         </div>
                                         <div class="form-actions">
@@ -121,11 +121,10 @@
                                 <table class="table table-striped table-bordered table-condensed">
                                     <thead>
                                         <tr>
-                                            <th></th>
                                             <th>#Id</th>
-                                            <th><a href="#">Nome <i class="icon-arrow-up"></i></a></th>
-                                            <th class="hidden-phone">E-mail</th>
-                                            <th class="hidden-phone">Data Nacimento</th>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Data Nacimento</th>
                                             <th>Operações</th>
                                         </tr>
 
@@ -139,7 +138,7 @@
         ?>
 
                                             <tr class="id1">
-                                                <td class="selections"><input class="selection" type="checkbox" value="1"></td>
+                                                
                                                 <td class="id"><?php echo $row->id_usuario; ?></td>
                                                 <td><?php echo $row->nome_usuario; ?></td>
                                                 <td class="hidden-phone"><?php echo $row->email_usuario; ?></td>
@@ -157,15 +156,7 @@
                                             </tr>
     <?php } ?>
 
-                                    <tr class="table-operations">
-                                        <td class="selections"><input class="selection select-all" type="checkbox" value="1"></td>
-                                        <td colspan="6" class="operations">
-                                            <a class="btn btn-small btn-success"><i class="icon-ok"></i> Ativar</a>
-                                            <a class="btn btn-small btn-warning"><i class="icon-remove"></i> Desativar</a>
-                                            <a class="btn btn-small btn-danger"><i class="icon-remove"></i> Remover</a>
-
-                                        </td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
 
