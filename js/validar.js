@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    
+    $("#data_nascimento").mask("99/99/9999");
+    
+    //Validando Form
     $("#form-cad-usuario").submit(function() {
         var nome = $("#nome").val();
         var email = $("#email").val();
