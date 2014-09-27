@@ -2,9 +2,11 @@
 <?php
 @session_start(); //Inicia sessão
 $data; //Valor para Objeto de alteração
+
 /* Verifica se a $_SESSION['user_update'] existe, caso exista a action recebera 
  * o valor para alteração, caso contrario valor de inserção; */
 isset($_SESSION['user_update']) ? $_SESSION['action'] = 4 : $_SESSION['action'] = 1;
+
 /* Se existir sessão $_SESSION, iremos passar o Objeto a variavel $data */
 isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) : false;
 ?>
@@ -33,17 +35,6 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
                         <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="#">App MVC Cadastro Usuarios e Produtos</a>
-                    <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-user"></i> Nome
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-user"></i> Pefil</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="icon-off"></i> Sair</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -106,7 +97,7 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
                                     </fieldset>
                                 </form>
                                 <?php
-                                    unset($_SESSION["user_update"]);//Destruindo sessão de update
+                                unset($_SESSION["user_update"]); //Destruindo sessão de update
                                 ?>
                             </div>
                         </div>
@@ -131,7 +122,7 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
                                 <tbody>
                                     <?php
                                     require_once '../dao/UsuarioDao.class.php';
-                                    /*Logo abaixo faremos uma busca por usuario cadastrados
+                                    /* Logo abaixo faremos uma busca por usuario cadastrados
                                      * para exibirmos em um lista. Com suas operações de edição
                                      * e remoção
                                      */

@@ -21,17 +21,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="#">App MVC Cadastro Usuarios e Produtos</a>
-                    <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-user"></i> Nome
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-user"></i> Pefil</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="icon-off"></i> Sair</a></li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -63,8 +53,8 @@
                                         <i class="icon-exclamation-sign icon-red"></i>
                                     </div>
                                     <div class="alert-content">
-                                        <h4>Erro ao cadastrar !</h4>
-                                        <?php echo $_REQUEST['info']?><br><br>
+                                        <h4>Erro na operação!</h4>
+                                        <?php echo $_REQUEST['info'] ?><br><br>
                                         <a class="btn" href="../index.php"> Voltar ao Inicio </a>
                                     </div>
                                 </div>
