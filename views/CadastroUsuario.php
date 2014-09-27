@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<?php @session_start();
+<?php
+@session_start(); //Inicia sessão
+$data; //Valor para Objeto de alteração
+/* Verifica se a $_SESSION['user_update'] existe, caso exista a action recebera 
+ * o valor para alteração, caso contrario valor de inserção; */
 isset($_SESSION['user_update']) ? $_SESSION['action'] = 4 : $_SESSION['action'] = 1;
-$data = unserialize($_SESSION['user_update']); ?>
+/* Se existir sessão $_SESSION, iremos passar o Objeto a variavel $data */
+isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) : false;
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -100,7 +106,7 @@ $data = unserialize($_SESSION['user_update']); ?>
                                     </fieldset>
                                 </form>
                                 <?php
-                                unset($_SESSION["user_update"]);
+                                    unset($_SESSION["user_update"]);//Destruindo sessão de update
                                 ?>
                             </div>
                         </div>
@@ -110,17 +116,6 @@ $data = unserialize($_SESSION['user_update']); ?>
                             <div class="panel-header">
                                 <i class="icon-list-alt icon-blue"></i>
                                 <h2>Usuarios</h2>
-                                <div class="actions-bar">
-                                    <div class="btn-group pull-right">
-                                        <a class="btn btn-success btn-mini">Açoes</a>
-                                        <a class="btn btn-success btn-mini dropdown-toggle" data-toggle="dropdown">
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="icon-plus"></i> Novo Usuario</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                             <table class="table table-striped table-bordered table-condensed">
                                 <thead>
@@ -136,20 +131,22 @@ $data = unserialize($_SESSION['user_update']); ?>
                                 <tbody>
                                     <?php
                                     require_once '../dao/UsuarioDao.class.php';
-                                    //Imprimindo Usuarios
+                                    /*Logo abaixo faremos uma busca por usuario cadastrados
+                                     * para exibirmos em um lista. Com suas operações de edição
+                                     * e remoção
+                                     */
                                     $daoUsuario = new UsuarioDao();
+                                    //Imprimindo Usuarios
                                     foreach ($daoUsuario->getAll() as $row) {
                                         ?>
 
-                                        <tr class="id1">
-
+                                        <tr class="id<?php echo $row->id_usuario; ?>">
                                             <td class="id"><?php echo $row->id_usuario; ?></td>
                                             <td><?php echo $row->nome_usuario; ?></td>
-                                            <td class="hidden-phone"><?php echo $row->email_usuario; ?></td>
-                                            <td class="hidden-phone"><?php echo implode("/", array_reverse(explode("-", $row->data_nasc_usuario))); ?></td>
+                                            <td><?php echo $row->email_usuario; ?></td>
+                                            <td><?php echo implode("/", array_reverse(explode("-", $row->data_nasc_usuario))); ?></td>
 
                                             <td class="operations">
-
                                                 <div class="btn-group pull-left">
                                                     <a href="../controllers/UsuarioController.php?action=2&id=<?php echo $row->id_usuario; ?>" class="btn btn-small btn-warning table-edit"><i class="icon-edit"></i></a>
                                                 </div>
@@ -158,9 +155,7 @@ $data = unserialize($_SESSION['user_update']); ?>
                                                 </div>
                                             </td>
                                         </tr>
-<?php } ?>
-
-
+                                    <?php } ?>
                                 </tbody>
                             </table>
 

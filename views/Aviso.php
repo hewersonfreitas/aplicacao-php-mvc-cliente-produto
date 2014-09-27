@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="alert-content">
                                         <h4>Erro ao cadastrar !</h4>
-                                        <?php echo $_REQUEST['info']?> já existente, tente novamente com email válido !<br><br>
+                                        <?php echo $_REQUEST['info']?><br><br>
                                         <a class="btn" href="../index.php"> Voltar ao Inicio </a>
                                     </div>
                                 </div>
