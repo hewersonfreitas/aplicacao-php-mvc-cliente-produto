@@ -35,10 +35,13 @@ switch ($_REQUEST['action']) {
                 
                 //Variavel para comparação de igualdade de registro
                 $p_nome = $daoProduto->getProduto($dados[0]);
-                
-                //Verifica duplicidade de produto,para inserção
-                if (strcmp(ucwords($p[0]->nome_produtos),$produto->getNomeProduto())) {
-                   header("location: ../views/Aviso.php?info=Produto já existente!");
+
+                /*Verifica duplicidade de produto ,para inserção
+                 * usando a função strcmp para comparar como case sensitive
+                 * usando ucwords para formatar nome
+                 */
+                if (!strcmp(ucwords($p_nome[0]->nome_produtos),$produto->getNomeProduto())) {
+                    header("location: ../views/Aviso.php?info=Produto já existente!");
                 } else {
                     $daoProduto->insert($produto);
                     header("location: ../views/CadastroProduto.php");
@@ -52,8 +55,8 @@ switch ($_REQUEST['action']) {
         //Resgatando registro
         $daoProduto = new ProdutoDao();
         $data = $daoProduto->getId($_REQUEST['id']); //Passando parametro do id do registro a ser deletado
-        $_SESSION['produto_update'] = serialize($data);
-        $_SESSION['action'] = 4;
+        $_SESSION['produto_update'] = serialize($data);//Passando objeto serializado por sessão
+        $_SESSION['action'] = 4;//sessão para atualização
         header("location: ../views/CadastroProduto.php");
         break;
     case 3:
@@ -63,7 +66,7 @@ switch ($_REQUEST['action']) {
         header("location: ../views/CadastroProduto.php");
         break;
     case 4:
-        //Inserção de Produto no Banco
+        //Alteração de Produto no Banco
 
         $flag = 1; //Varivel booleana, verificação dados
         //Verificando se existe dados vazios
