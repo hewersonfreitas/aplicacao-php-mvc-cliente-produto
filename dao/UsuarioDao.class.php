@@ -31,7 +31,7 @@ class UsuarioDao extends Conexao{
     }
     
     public function getEmail($email) {
-        $sql = "SELECT email_usuario FROM usuario WHERE email_usuario = '" . $email."'";
+        $sql = "SELECT id_usuario,email_usuario FROM usuario WHERE email_usuario = '" . $email."'";
         $resultSet = $this->Conectar()->query($sql);
         $resultSet->execute();
         return $resultSet->fetch(PDO::FETCH_OBJ);

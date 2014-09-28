@@ -11,8 +11,8 @@ class ProdutoDao extends Conexao {
                 . "values(:produto,:qtd,:valor)";
         $statement = $this->Conectar()->prepare($sql);
         $statement->bindValue(":produto", $produto->getNomeProduto());
-        $statement->bindValue(":qtd", (int) $produto->getQuantidadeProduto());
-        $statement->bindValue(":valor", (double) $produto->getValorProduto());
+        $statement->bindValue(":qtd", (int)$produto->getQuantidadeProduto());
+        $statement->bindValue(":valor", (double)$produto->getValorProduto());
         $statement->execute();
     }
 
@@ -23,42 +23,42 @@ class ProdutoDao extends Conexao {
     }
 
     public function getId($id) {
-        $sql = "SELECT * FROM produtos WHERE id_produtos = " . $id;
+        $sql = "SELECT * FROM produtos WHERE id_produtos = " . (int)$id;
         $resultSet = $this->Conectar()->query($sql);
         $resultSet->execute();
         return $resultSet->fetch(PDO::FETCH_OBJ);
     }
 
     public function getProduto($produto) {
-        $sql = "SELECT * FROM produtos WHERE nome_produto LIKE '" . $produto . "'";
+        $sql = "SELECT * FROM produtos WHERE nome_produtos LIKE '%" . $produto . "%'";
         $resultSet = $this->Conectar()->query($sql);
         $resultSet->execute();
-        return $resultSet->fetch(PDO::FETCH_OBJ);
+        return $resultSet->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getSumQtd($id) {
-        $sql = "SELECT SUM(qtd_produtos) FROM produtos WHERE id_produto = " . (int) $id . "";
+    public function getQtd($id) {
+        $sql = "SELECT qtd_produtos FROM produtos WHERE id_produtos = " . (int) $id . "";
         $resultSet = $this->Conectar()->query($sql);
         $resultSet->execute();
         return $resultSet->fetch(PDO::FETCH_OBJ);
     }
 
     public function getSumQtdAll() {
-        $sql = "SELECT SUM(qtd_produtos) FROM produtos";
+        $sql = "SELECT SUM(qtd_produtos) as sum_qtd FROM produtos";
         $resultSet = $this->Conectar()->query($sql);
         $resultSet->execute();
         return $resultSet->fetch(PDO::FETCH_OBJ);
     }
 
-    public function getSumVal($id) {
-        $sql = "SELECT SUM(valor_produtos) FROM produtos WHERE id_produto = " . (int) $id . "";
+    public function getVal($id) {
+        $sql = "SELECT valor_produtos FROM produtos WHERE id_produtos = " . (int) $id . "";
         $resultSet = $this->Conectar()->query($sql);
         $resultSet->execute();
         return $resultSet->fetch(PDO::FETCH_OBJ);
     }
 
     public function getSumValAll() {
-        $sql = "SELECT SUM(valor_produtos) FROM produtos";
+        $sql = "SELECT SUM(valor_produtos) as sum_valor FROM produtos";
         $resultSet = $this->Conectar()->query($sql);
         $resultSet->execute();
         return $resultSet->fetch(PDO::FETCH_OBJ);

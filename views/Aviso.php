@@ -33,7 +33,8 @@
                     <div class="sidebar-nav">
                         <ul class="nav nav-list">
                             <li class="active"><a href="../index.php"><i class="icon-home icon-aqua"></i> Home</a></li>
-                            <li><a href="CadastroUsuario.php"><i class="icon-tasks icon-aqua"></i> Usuario</a></li>
+                            <li><a href="CadastroUsuario.php"><i class="icon-user icon-aqua"></i> Cadastro de Usuarios</a></li>
+                            <li><a href="CadastroProduto.php" ><i class="icon-shopping-cart icon-aqua"></i> Cadastro de Produtos  </a></li>
                         </ul>
                     </div>
                 </div><!--/span-->

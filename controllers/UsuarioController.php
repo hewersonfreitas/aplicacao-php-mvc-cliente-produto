@@ -27,27 +27,26 @@ switch ($_REQUEST['action']) {
             if (filter_var($dados[1], FILTER_VALIDATE_EMAIL) && checkdate($data_check[1], $data_check[0], $data_check[2])) {
                 //Formatando data
                 $data = implode("-", array_reverse(explode("/", $dados[3])));
-                //Enviando dados para o Objeto de usuario
-                $usuario = new Usuario($dados[0], $dados[1], $dados[2], $data);
+                //Enviando dados para o Objeto de usuario, convertendo Nome em UCWORDS, e Email em STRLOWER
+                $usuario = new Usuario(ucwords($dados[0]), strtolower($dados[1]), $dados[2], $data);
                 //Persistindo Usuario no Banco
                 $daoUsuario = new UsuarioDao();
 
                 //Verifica duplicidade de email
                 if ($daoUsuario->getEmail($dados[1])->email_usuario == $dados[1]) {
 
-                    header("location: ../views/Aviso.php?info=Email");
+                    header("location: ../views/Aviso.php?info=Email já existente, tente novamente com email válido !");
                 } else {
                     $daoUsuario->insert($usuario);
                     header("location: ../views/CadastroUsuario.php");
                 }
-            }else{
+            } else {
                 header("location: ../views/Aviso.php?info=Houve um erro ao cadastrar, confira seus dados corretamente!");
             }
         }
         break;
     case 2:
-        //Deletando registro
-
+        //Resgatando registro
         $daoUsuario = new UsuarioDao();
         $data = $daoUsuario->getId($_REQUEST['id']); //Passando parametro do id do registro a ser deletado
         @session_start();
@@ -62,7 +61,7 @@ switch ($_REQUEST['action']) {
         header("location: ../views/CadastroUsuario.php");
         break;
     case 4:
-        //Inserção de Usuario no Banco
+        //Alteração de Usuario no Banco
 
         $flag = 1; //Varivel booleana, verificação dados
         //Verificando se existe dados vazios
@@ -74,7 +73,7 @@ switch ($_REQUEST['action']) {
 
         //Inicio de Envio para persistencia
         if ($flag) {
-//array data verificação
+            //array data verificação
             $data_check = explode('/', $dados[3]); //Explode data para verificação
 
             /* Verificação de email antes de enviar, valores resgatados ao Objeto */
@@ -83,19 +82,19 @@ switch ($_REQUEST['action']) {
                 $data = implode("-", array_reverse(explode("/", $dados[3])));
 
                 //Enviando dados para o Objeto de usuario
-                $usuario = new Usuario($dados[0], $dados[1], $dados[2], $dados[3]);
-
+                $usuario = new Usuario($dados[0], $dados[1], $dados[2], $data);
+               
                 //Persistindo Usuario no Banco
                 $daoUsuario = new UsuarioDao();
 
                 //Verifica duplicidade de email
-                if ($daoUsuario->getEmail($dados[1])->email_usuario == $dados[1]) {
+                if (($daoUsuario->getEmail($usuario->getEmailUsuario())->email_usuario == $usuario->getEmailUsuario())&&($daoUsuario->getEmail($usuario->getEmailUsuario())->id_usuario != (int)$dados[4])) {
                     header("location: ../views/Aviso.php?info=Email já existente, tente novamente com email válido !");
                 } else {
                     $daoUsuario->update($usuario, $dados[4]);
                     header("location: ../views/CadastroUsuario.php");
                 }
-            }else{
+            } else {
                 header("location: ../views/Aviso.php?info=Houve um erro ao cadastrar, confira seus dados corretamente!");
             }
         }

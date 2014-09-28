@@ -25,7 +25,7 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
     <body>
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="../js/jquery.mask.min.js"></script>
-        <script type="text/javascript" src="../js/validar.js"></script>
+        <script type="text/javascript" src="../js/validar-usuario.js"></script>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -46,7 +46,8 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
                     <div class="sidebar-nav">
                         <ul class="nav nav-list">
                             <li class="active"><a href="../index.php" ><i class="icon-home icon-aqua"></i> Home </a></li>
-                            <li><a href="CadastroUsuario.php"><i class="icon-tasks icon-aqua"></i> Usuario</a></li>
+                            <li><a href="CadastroUsuario.php"><i class="icon-user icon-aqua"></i> Cadastro de Usuarios</a></li>
+                            <li><a href="CadastroProduto.php" ><i class="icon-shopping-cart icon-aqua"></i> Cadastro de Produtos  </a></li>
                         </ul>
                     </div>
                 </div><!--/span-->
@@ -82,8 +83,9 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
                                         <div class="control-group">
                                             <label for="inputSuccess" class="control-label">Data Nascimento:</label>
                                             <div class="controls">
-                                                <input type="text" class="input-medium" id="data_nascimento" value="<?php echo $data->data_nasc_usuario; ?>" name="dados[]"><i id="data-msg"></i>
+                                                <input type="text" class="input-medium" id="data_nascimento" value="<?php echo implode("", array_reverse(explode("-", $data->data_nasc_usuario))); ?>" name="dados[]"><i id="data-msg"></i>
                                             </div>
+                                            
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
