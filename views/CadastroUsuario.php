@@ -115,8 +115,8 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
                                     <tr>
                                         <th>#Id</th>
                                         <th>Nome</th>
-                                        <th>E-mail</th>
-                                        <th>Data Nacimento</th>
+                                        <th class="hidden-phone">E-mail</th>
+                                        <th class="hidden-phone">Data Nacimento</th>
                                         <th>Operações</th>
                                     </tr>
 
@@ -136,8 +136,8 @@ isset($_SESSION['user_update']) ? $data = unserialize($_SESSION['user_update']) 
                                         <tr class="id<?php echo $row->id_usuario; ?>">
                                             <td class="id"><?php echo $row->id_usuario; ?></td>
                                             <td><?php echo $row->nome_usuario; ?></td>
-                                            <td><?php echo $row->email_usuario; ?></td>
-                                            <td><?php echo implode("/", array_reverse(explode("-", $row->data_nasc_usuario))); ?></td>
+                                            <td class="hidden-phone"><?php echo $row->email_usuario; ?></td>
+                                            <td class="hidden-phone"><?php echo implode("/", array_reverse(explode("-", $row->data_nasc_usuario))); ?></td>
 
                                             <td class="operations">
                                                 <div class="btn-group pull-left">

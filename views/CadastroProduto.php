@@ -100,29 +100,30 @@ isset($_SESSION['produto_update']) ? $data = unserialize($_SESSION['produto_upda
 
                         <!-- Listagem Produtos-->
                         <div class="span11 panel">
-                            <div class="panel-header">
+                            <div class="panel-header" style="margin-bottom: 0px;">
                                 <i class="icon-list-alt icon-blue"></i>
-                                <h2>Produtos</h2>
+                                <h2>Produtos</h2>                                
                             </div>
                             <table class="table table-striped table-bordered table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>#Id</th>
-                                        <th>
-                                <div class="controls">
-                                    <div class="btn-group" style="height: 26px;">
-                                        <div class="pull-left" style="margin-top: 5px;">Produto&nbsp;</div>
-                                        <form action="<?php echo $PHP_SELF; ?>" method="POST">
-                                            <input class="input-xlarge pull-left" type="text" name="search-produto" placeholder="Clique no botão de busca, para ver todos!"style="height: 15px; margin-bottom: 0px;" >
+
+                                <div class="controls" style="margin-bottom: 5px;">
+                                    <div class="btn-group">                                        
+                                        <form class="hidden-phone" style="margin-bottom: 5px;" action="<?php echo $PHP_SELF; ?>" method="POST" >
+                                            <label class="pull-left" style="margin-top: 3px;" for="inputSuccess" class="control-label">Buscar Produto: </label>
+                                            <input class="input-medium pull-left" type="text" name="search-produto" placeholder="Digite o produto!!" title="Clique no botão de busca, para ver todos!" style="margin-bottom: 0px;" >
                                             <button type="submit" class="btn btn-small btn-info"><i class="icon-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
-                                </th>
-                                <th>Quantidade</th>
-                                <th>Valor</th>
-                                <th>Operações</th>
-                                </tr>
+
+                                <thead>
+                                    <tr>
+                                        <th>#Id</th>
+                                        <th>Produto</th>
+                                        <th class=>Quantidade</th>
+                                        <th class="hidden-phone">Valor</th>
+                                        <th>Operações</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <?php
@@ -143,9 +144,9 @@ isset($_SESSION['produto_update']) ? $data = unserialize($_SESSION['produto_upda
                                      * 
                                      */
                                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                                        $produtos = $daoProduto->getProduto($_REQUEST['search-produto']);//Resgata registro de unico produto ou vários através da clausula LIKE
+                                        $produtos = $daoProduto->getProduto($_REQUEST['search-produto']); //Resgata registro de unico produto ou vários através da clausula LIKE
                                     } else {
-                                        $produtos = $daoProduto->getAll();//Resgata todos os registros
+                                        $produtos = $daoProduto->getAll(); //Resgata todos os registros
                                     }
 
                                     //Listagem de Produtos
@@ -158,7 +159,7 @@ isset($_SESSION['produto_update']) ? $data = unserialize($_SESSION['produto_upda
                                             <td class="id"><?php echo $row->id_produtos; ?></td>
                                             <td><?php echo $row->nome_produtos; ?></td>
                                             <td><?php echo $row->qtd_produtos; ?></td>
-                                            <td><?php echo "R$" . number_format($row->valor_produtos, 2, ',', '.'); ?></td>
+                                            <td class="hidden-phone"><?php echo "R$" . number_format($row->valor_produtos, 2, ',', '.'); ?></td>
 
                                             <td class="operations">
                                                 <div class="btn-group pull-left">
@@ -173,16 +174,16 @@ isset($_SESSION['produto_update']) ? $data = unserialize($_SESSION['produto_upda
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td>Total Quantidade: 
+                                        <td class="hidden-phone">Total Quantidade: 
                                             <?php
                                             /*
                                              * Somando quantidade total, a partir produtos resgatados 
                                              * na busca anterior.
                                              */
-                                            
+
                                             //Variavel para armazenamento de soma das quantidades
                                             $somaQtd = 0;
-                                            
+
                                             //Verificando se existe algo enviado para a pagina
                                             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 /*
@@ -196,23 +197,22 @@ isset($_SESSION['produto_update']) ? $data = unserialize($_SESSION['produto_upda
                                                 echo $somaQtd;
                                             } else {
                                                 //Resgata soma de todos os registros, imprime.
-                                                isset($daoProduto->getSumQtdAll()->sum_qtd)?$val = $daoProduto->getSumQtdAll()->sum_qtd:false;
+                                                isset($daoProduto->getSumQtdAll()->sum_qtd) ? $val = $daoProduto->getSumQtdAll()->sum_qtd : false;
                                                 echo $val;
-                                                
                                             }
                                             ?>
                                         </td>
-                                        <td>
+                                        <td class="hidden-phone">
                                             Total Valor:
                                             <?php
                                             /*
                                              * Somando quantidade total, a partir produtos resgatados 
                                              * na busca anterior.
                                              */
-                                            
+
                                             //Variavel para armazenamento de soma dos
                                             $somaValor = 0;
-                                            
+
                                             //Verificando se existe algo enviado para a pagina
                                             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 /*
@@ -221,7 +221,7 @@ isset($_SESSION['produto_update']) ? $data = unserialize($_SESSION['produto_upda
                                                  * para impressão logo após
                                                  */
                                                 foreach ($produtos as $row) {
-                                                    $somaValor +=  $daoProduto->getVal($row->id_produtos)->valor_produtos;
+                                                    $somaValor += $daoProduto->getVal($row->id_produtos)->valor_produtos;
                                                 }
                                                 echo "R$" . number_format($somaValor, 2, ',', '.');
                                             } else {
